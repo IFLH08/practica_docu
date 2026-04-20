@@ -17,7 +17,7 @@ jobs:
   quality:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout # (Requisito 1: Revisión del repositorio)
         uses: actions/checkout@v4
 
       - name: Setup Node
@@ -29,7 +29,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build develop preview
+      # --- INICIO DE LO JUSTO Y NECESARIO (FASE 6) ---
+      - name: Validar sintaxis (Requisito 2)
+        run: npm run lint
+
+      - name: Comprobar variables simuladas (Requisito 4)
+        run: |
+          cp .env.example .env
+          npx tsx config/validate-env.ts
+      # --- FIN DE LO JUSTO Y NECESARIO ---
+
+      - name: Build develop preview # (Requisito 3: Pruebas o ejecución controlada)
         if: github.ref == 'refs/heads/develop' || github.base_ref == 'develop'
         run: npm run build
         env:
