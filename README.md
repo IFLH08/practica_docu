@@ -71,3 +71,27 @@ export default defineConfig([
   },
 ])
 ```
+//-----------------------------------------------------------------------------------
+## Gestión de Configuración y Secretos
+
+### Propósito de la solución
+Implementar una solución profesional para manejar la configuración de la aplicación y proteger credenciales sensibles mediante variables de entorno, evitando quemar datos en el código fuente.
+
+### Variables requeridas
+* **Configuración pública:** `APP_NAME`, `PORT`, `NODE_ENV`, `LOG_LEVEL`, `FEATURE_X_ENABLED`
+* **Secretos:** `DB_PASSWORD`, `API_KEY`, `JWT_SECRET`
+
+### Diferencia entre configuración y secretos
+* **Configuración General:** Son parámetros seguros que definen el comportamiento de la app.
+* **Secretos:** Son datos altamente sensibles (contraseñas, tokens) que jamás deben exponerse al código del navegador.
+
+### Cómo crear el .env
+*Se duplica el archivo `.env.example` y se cambian las credenciales por las reales.
+
+### Qué no debe subirse al repositorio
+* No se tiene que subir el archivo `.env`. Este archivo contiene contraseñas reales y datos sensibles que no se deben dar al publico.
+
+### Cómo ejecutar la aplicación y validar que funciona
+* Preparar el archivo `.env`.
+* Ejecutar el comando: `npm run dev`
+* Al ejecutar el comando un script evaluará las variables, si todo esta bien configurado la aplicación arrancará con normalidad y mostrara mensaje de validacion. Si hay algun error  la ejecución se detendrá con un mensaje de error.
